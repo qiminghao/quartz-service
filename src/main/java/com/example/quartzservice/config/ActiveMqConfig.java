@@ -3,6 +3,8 @@ package com.example.quartzservice.config;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
+import org.springframework.jms.config.JmsListenerContainerFactory;
 import org.springframework.jms.connection.CachingConnectionFactory;
 import org.springframework.jms.core.JmsTemplate;
 
@@ -31,5 +33,12 @@ public class ActiveMqConfig {
         JmsTemplate jmsTemplate = new JmsTemplate(activeMQConnectionFactory);
         jmsTemplate.setPubSubDomain(false);
         return jmsTemplate;
+    }
+
+    @Bean(name="jmsListenerContainerFactory")
+    public JmsListenerContainerFactory jmsListenerContainerFactory(ConnectionFactory activeMQConnectionFactory) {
+        DefaultJmsListenerContainerFactory bean = new DefaultJmsListenerContainerFactory();
+        bean.setConnectionFactory(activeMQConnectionFactory);
+        return bean;
     }
 }

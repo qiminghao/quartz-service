@@ -1,5 +1,6 @@
 package com.example.quartzservice.service.impl;
 
+import com.example.quartzservice.QuartzSchedulerManager;
 import com.example.quartzservice.constants.JobDataConstants;
 import com.example.quartzservice.dao.TaskInfoDao;
 import com.example.quartzservice.entity.TaskInfoEntity;
@@ -23,16 +24,16 @@ public class JobServiceImpl implements JobService {
     @Autowired
     private TaskInfoDao taskInfoDao;
 
+    @Autowired
+    private QuartzSchedulerManager quartzSchedulerManager;
+
     @Override
-    @SuppressWarnings("unchecked")
     public Integer addJob(AddJobRequest request) throws SchedulerException {
-//        TaskInfoEntity entity = new TaskInfoEntity();
-//        BeanUtils.copyProperties(request, entity);
-//        entity.setJobStatus(JobStatusEnum.UNFROZEN.getCode());
-//        int id = taskInfoDao.insert(entity);
-//        Scheduler scheduler = schedulerFactory.getScheduler(entity.getJobGroup());
-//        scheduler(entity, scheduler);
-//        QuartzSchedulerManager.addJob(entity);
+        TaskInfoEntity entity = new TaskInfoEntity();
+        BeanUtils.copyProperties(request, entity);
+        entity.setJobStatus(JobStatusEnum.UNFROZEN.getCode());
+        int id = taskInfoDao.insert(entity);
+        quartzSchedulerManager.addJob(entity);
         return 314;
     }
 

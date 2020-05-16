@@ -94,6 +94,25 @@
                 </configuration>
             </plugin>
         </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+
+            <resource>
+                <includes>
+                    <include>src/main/resources/application.properties</include>
+                    <include>src/main/resources/database.properties</include>
+                    <include>src/main/resources/mqConfig.properties</include>
+                    <include>src/main/resources/quartz.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources/mapper</directory>
+            </resource>
+        </resources>
     </build>
 
 </project>

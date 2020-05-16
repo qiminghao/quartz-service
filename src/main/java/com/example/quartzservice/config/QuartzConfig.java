@@ -12,7 +12,11 @@ public class QuartzConfig {
 
     @Bean(name="schedulerFactory")
     public SchedulerFactory schedulerFactory() {
-
         return new StdSchedulerFactory();
+    }
+
+    @Bean(name="scheduler")
+    public Scheduler scheduler(SchedulerFactory schedulerFactory) throws SchedulerException {
+        return schedulerFactory.getScheduler();
     }
 }

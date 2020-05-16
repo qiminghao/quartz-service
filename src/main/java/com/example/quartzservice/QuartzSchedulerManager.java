@@ -15,7 +15,7 @@ import java.util.List;
 @Component
 public class QuartzSchedulerManager {
 
-
+    @Autowired
     private Scheduler scheduler;
 
     @Autowired
@@ -135,6 +135,7 @@ public class QuartzSchedulerManager {
             throw new RuntimeException(e);
         }
     }
+
 
     public Scheduler getScheduler() {
         return scheduler;
